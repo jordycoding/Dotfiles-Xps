@@ -2,7 +2,7 @@
     "layer": "top", // Waybar at top layer
     "modules-left": ["sway/workspaces", "sway/mode"],
     "modules-center": ["custom/media"],
-    "modules-right": ["pulseaudio", "network", "memory", "backlight", "battery", "clock", "tray"],
+    "modules-right": ["pulseaudio", "network", "memory", "backlight", "battery", "clock", "tray", "custom/power"],
     "sway/workspaces": {
         "persistent_workspaces": {
             "1": [],
@@ -105,6 +105,11 @@
     },
     "backlight": {
         "format": "{percent}% "
+    },
+    "custom/power": {
+        "format": "襤",
+        "interval": "once",
+        "on-click": "wlogout -c 7 -r 7 -p layer-shell"
     }
 }
 

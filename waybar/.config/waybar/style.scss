@@ -50,7 +50,7 @@ window#waybar {
     border-radius: 40px;
 }
 .modules-right *{
-    margin: 7px 4px;
+    margin: 7px 2px;
 }
 
 #mode {
@@ -63,8 +63,14 @@ window#waybar {
 #backlight,
 #battery,
 #clock,
-#tray{
+#tray,
+#custom-power{
     padding: 0px 10px;
+}
+
+#custom-power {
+    color: $red;
+    font-size: 16px;
 }
 
 #network.wifi{
