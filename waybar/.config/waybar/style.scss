@@ -1,0 +1,91 @@
+/* Import theme variables */
+@import "themes/catppuccin";
+
+*{
+   font-family: "JetBrains Mono Nerd Font";
+   font-size: 14px;
+}
+
+window#waybar {
+    background-color: $background;
+}
+
+#workspaces button{
+    color: $textcolor;
+}
+
+#workspaces button:hover{
+    box-shadow: inherit;
+    text-shadow: inherit;
+    color: $pink;
+}
+
+#workspaces button.focused{
+    color: $blue;
+}
+
+.modules-left {
+    background: $modulecolor;
+    margin: 7px 4px;
+    padding: 0px 10px;
+    border-radius: 40px;
+}
+
+.modules-center {
+    margin: 7px 0px 7px 0px;
+    padding: 7px;
+    border-radius: 90px;
+    background: $modulecolor;
+}
+
+.modules-right *{
+    margin: 7px 4px;
+}
+
+#mode {
+    background-color: $highlightmodule;
+}
+
+#pulseaudio,
+#network,
+#memory,
+#backlight,
+#battery,
+#clock,
+#tray{
+    padding: 0px 10px;
+    border-radius: 40px;
+    background-color: $modulecolor;
+}
+
+#network.wifi{
+    color: $green;
+}
+
+#memory {
+    color: $blue;
+}
+
+#backlight {
+    color: $yellow;
+}
+
+#battery.good{
+    color: $green;
+}
+
+#battery.warning{
+    color: $yellow;
+}
+
+#battery.critical{
+    color: $red;
+}
+
+#clock {
+    color: $textcolor;
+}
+
+#tray > * {
+    margin: 2px;
+}

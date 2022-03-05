@@ -1,0 +1,18 @@
+window {
+    background: #1E1E2E;
+    border-radius: 10px;
+}
+
+#input {
+    background: #1E1E2E;
+    border-radius: 10px;
+    border: none;
+}
+
+#entry:selected {
+    background: #575268;
+}
+
+*{
+    color: #D9E0EE; 
+}

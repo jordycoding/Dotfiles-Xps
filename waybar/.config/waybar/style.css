@@ -1,0 +1,71 @@
+/* Import theme variables */
+* {
+  font-family: "JetBrains Mono Nerd Font";
+  font-size: 14px; }
+
+window#waybar {
+  background-color: #1E1E2E; }
+
+#workspaces button {
+  color: #D9E0EE; }
+
+#workspaces button:hover {
+  box-shadow: inherit;
+  text-shadow: inherit;
+  color: #F5C2E7; }
+
+#workspaces button.focused {
+  color: #96CDFB; }
+
+.modules-left {
+  background: #302D41;
+  margin: 7px 4px;
+  padding: 0px 10px;
+  border-radius: 40px; }
+
+.modules-center {
+  margin: 7px 0px 7px 0px;
+  padding: 7px;
+  border-radius: 90px;
+  background: #302D41; }
+
+.modules-right * {
+  margin: 7px 4px; }
+
+#mode {
+  background-color: #575268; }
+
+#pulseaudio,
+#network,
+#memory,
+#backlight,
+#battery,
+#clock,
+#tray {
+  padding: 0px 10px;
+  border-radius: 40px;
+  background-color: #302D41; }
+
+#network.wifi {
+  color: #ABE9B3; }
+
+#memory {
+  color: #96CDFB; }
+
+#backlight {
+  color: #FAE3B0; }
+
+#battery.good {
+  color: #ABE9B3; }
+
+#battery.warning {
+  color: #FAE3B0; }
+
+#battery.critical {
+  color: #F28FAD; }
+
+#clock {
+  color: #D9E0EE; }
+
+#tray > * {
+  margin: 2px; }

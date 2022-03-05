@@ -18,11 +18,11 @@ set $term alacritty
 # Your preferred application launcher
 # Note: pass the final command to swaymsg so that the resulting window can be opened
 # on the original workspace that the command was run on.
-set $menu wofi --show run || xargs swaymsg exec -- 
+set $menu wofi --show drun || xargs swaymsg exec -- 
 ### Output configuration
 #
 # Default wallpaper (more resolutions are available in /usr/share/backgrounds/sway/)
-output * bg /usr/share/backgrounds/sway/Sway_Wallpaper_Blue_1920x1080.png fill
+output * bg ~/Pictures/Wallpapers/evening-sky.png fill
 #
 # Example configuration:
 #
@@ -31,11 +31,24 @@ output * bg /usr/share/backgrounds/sway/Sway_Wallpaper_Blue_1920x1080.png fill
 # You can get the names of your outputs by running: swaymsg -t get_outputs
 
 # Hide title bars
-default_border none
+default_border pixel
+client.focused #96CDFB #1E1E2E #D9E0EE #F8BD96 #96CDFB
+
+# Start gesture shit
+exec libinput-gestures
+
+# Start notification daemon
+exec mako
 
 # Gaps
 gaps inner 7
 gaps outer 7
+
+
+#Lock screen before sleep
+
+exec swayidle -w \
+    before-sleep 'swaylock'
 ### Idle configuration
 #
 # Example configuration:
@@ -76,6 +89,8 @@ gaps outer 7
     # Start your launcher
     bindsym $mod+d exec $menu
 
+    # Lock screen
+    bindsym $mod+Ctrl+l exec swaylock
     # Drag floating windows by holding down $mod and left mouse button.
     # Resize them with right mouse button + $mod.
     # Despite the name, also works for non-floating windows.
@@ -87,8 +102,9 @@ gaps outer 7
     bindsym $mod+Shift+c reload
 
     # Exit sway (logs you out of your Wayland session)
-    bindsym $mod+Shift+e exec swaynag -t warning -m 'You pressed the exit shortcut. Do you really want to exit sway? This will end your Wayland session.' -B 'Yes, exit sway' 'swaymsg exit'
-#
+    #bindsym $mod+Shift+e exec swaynag -t warning -m 'You pressed the exit shortcut. Do you really want to exit sway? This will end your Wayland session.' -B 'Yes, exit sway' 'swaymsg exit'
+bindsym $mod+Shift+e exec ~/.config/sway/scripts/exit.sh
+
 # Moving around:
 #
     # Move your focus around
@@ -201,6 +217,19 @@ mode "resize" {
 }
 bindsym $mod+r mode "resize"
 
+# Volume control
+bindsym XF86AudioMute exec pactl set-sink-mute @DEFAULT_SINK@ toggle
+bindsym XF86AudioRaiseVolume exec pactl set-sink-volume @DEFAULT_SINK@ +5%
+bindsym XF86AudioLowerVolume exec pactl set-sink-volume @DEFAULT_SINK@ -5%
+
+#Brightness control
+bindsym XF86MonBrightnessUp exec light -A 5
+bindsym XF86MonBrightnessDown exec light -U 5
+
+#Screenshots
+bindsym $mod+Print exec grim - | wl-copy && notify-send " Screenshot taken" "Copied to clipboard"
+bindsym $mod+Shift+Print exec grim -g "$(slurp -d)" - | wl-copy && notify-send " Screenshot taken" "Copied to clipboard"
+
 #
 # Status Bar:
 #
@@ -209,4 +238,20 @@ bar {
     swaybar_command waybar
 }
 
+input type:touchpad {
+    tap enabled
+    natural_scroll enabled
+}
+
+# Yay all sorts of theming and settings because apparently we can't have one standard
+set $gnome-schema org.gnome.desktop.interface
+
+exec_always {
+    gsettings set $gnome-schema cursor-theme 'Catppuccin-Dark-Cursors'
+    gsettings set $gnome-schema gtk-theme 'Catppuccin-blue'
+}
+# Yeah you have to set your cursor three times(last one in .icons/default/index.theme for some stupid reason)
+seat seat0 xcursor_theme 'Catppuccin-Dark-Cursors'
+
+for_window [app_id="zenity"] floating enable
 include /etc/sway/config.d/*
