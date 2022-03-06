@@ -1,32 +1,15 @@
-### Added by Zinit's installer
-if [[ ! -f $HOME/.zinit/bin/zinit.zsh ]]; then
-    print -P "%F{33}▓▒░ %F{220}Installing %F{33}DHARMA%F{220} Initiative Plugin Manager (%F{33}zdharma/zinit%F{220})…%f"
-    command mkdir -p "$HOME/.zinit" && command chmod g-rwX "$HOME/.zinit"
-    command git clone https://github.com/zdharma/zinit "$HOME/.zinit/bin" && \
-        print -P "%F{33}▓▒░ %F{34}Installation successful.%f%b" || \
-        print -P "%F{160}▓▒░ The clone has failed.%f%b"
+if [[ ! -f ~/.zpm/zpm.zsh ]]; then
+  git clone --recursive https://github.com/zpm-zsh/zpm ~/.zpm
 fi
-
-source "$HOME/.zinit/bin/zinit.zsh"
-autoload -Uz _zinit
-(( ${+_comps} )) && _comps[zinit]=_zinit
-
-# Load a few important annexes, without Turbo
-# (this is currently required for annexes)
-zinit light-mode for \
-    zinit-zsh/z-a-rust \
-    zinit-zsh/z-a-as-monitor \
-    zinit-zsh/z-a-patch-dl \
-    zinit-zsh/z-a-bin-gem-node
-
-zinit light zsh-users/zsh-completions #Completions
+source ~/.zpm/zpm.zsh
+zpm load @github/zsh-users/zsh-completions #Completions
 #Auto completion
 autoload -Uz compinit
 compinit
 
-zinit light zsh-users/zsh-autosuggestions #Suggestions based on history and such
-zinit light zdharma/fast-syntax-highlighting #Syntax highlighting
-zinit light zsh-users/zsh-history-substring-search #Search history for substrings(up arrow key similar commands thingy)
+zpm load @github/zsh-users/zsh-autosuggestions #Suggestions based on history and such
+zpm load @github/zsh-users/zsh-syntax-highlighting #Syntax highlighting
+zpm load @github/zsh-users/zsh-history-substring-search #Search history for substrings(up arrow key similar commands thingy)
 
 #History substring search
 bindkey '^[[A' history-substring-search-up
@@ -56,10 +39,6 @@ zstyle ':completion:*' menu select
 zstyle ':completion:*' group-name '' # group results by category
 zstyle ':completion:::::' completer _expand _complete _ignored _approximate #enable approximate matches for completion
 
-
-### End of Zinit's installer chunk
 eval "$(starship init zsh)"
 eval $(thefuck --alias)
 pfetch
-
-
