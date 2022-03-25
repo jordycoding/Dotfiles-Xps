@@ -18,7 +18,7 @@ set $term alacritty
 # Your preferred application launcher
 # Note: pass the final command to swaymsg so that the resulting window can be opened
 # on the original workspace that the command was run on.
-set $menu wofi --show drun || xargs swaymsg exec -- 
+set $menu rofi -show drun 
 ### Output configuration
 #
 # Default wallpaper (more resolutions are available in /usr/share/backgrounds/sway/)
@@ -39,6 +39,9 @@ exec libinput-gestures
 
 # Start notification daemon
 exec mako
+
+# Start xdg desktop portal for screen sharing
+exec dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP=sway
 
 # Gaps
 gaps inner 7
@@ -221,7 +224,8 @@ bindsym $mod+r mode "resize"
 bindsym XF86AudioMute exec pactl set-sink-mute @DEFAULT_SINK@ toggle
 bindsym XF86AudioRaiseVolume exec pactl set-sink-volume @DEFAULT_SINK@ +5%
 bindsym XF86AudioLowerVolume exec pactl set-sink-volume @DEFAULT_SINK@ -5%
-
+bindsym XF86AudioPlay exec playerctl play
+bindsym XF86AudioStop exec playerctl pause
 #Brightness control
 bindsym XF86MonBrightnessUp exec light -A 5
 bindsym XF86MonBrightnessDown exec light -U 5
@@ -229,6 +233,9 @@ bindsym XF86MonBrightnessDown exec light -U 5
 #Screenshots
 bindsym $mod+Print exec grim - | wl-copy && notify-send " Screenshot taken" "Copied to clipboard"
 bindsym $mod+Shift+Print exec grim -g "$(slurp -d)" - | wl-copy && notify-send " Screenshot taken" "Copied to clipboard"
+bindsym $mod+Ctrl+Print exec grim $(xdg-user-dir PICTURES)/screenshots/$(date +"screenshot%Y%m%d_%H%M%S.png") && notify-send " Screenshot taken" "Saved to screenshot folder"
+bindsym $mod+Ctrl+Shift+Print exec grim -g "$(slurp -d)" $(xdg-user-dir PICTURES)/screenshots/$(date +"screenshot%Y%m%d_%H%M%S.png") && notify-send " Screenshot taken" "Saved to screenshot folder"
+ 
 
 #
 # Status Bar:
