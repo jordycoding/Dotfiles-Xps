@@ -180,6 +180,8 @@ bindsym $mod+Shift+e exec ~/.config/sway/scripts/exit.sh
 
     # Move focus to the parent container
     bindsym $mod+a focus parent
+    bindsym $mod+F11 exec ddcutil setvcp 10 - 5
+    bindsym $mod+F12 exec ddcutil setvcp 10 + 5
 #
 # Scratchpad:
 #
@@ -245,6 +247,10 @@ set $gnome-schema org.gnome.desktop.interface
 exec_always {
     gsettings set $gnome-schema cursor-theme 'Catppuccin-Dark-Cursors'
     gsettings set $gnome-schema gtk-theme 'Catppuccin-blue'
+}
+
+input "type:keyboard" {
+    xkb_options ctrl:nocaps
 }
 # Yeah you have to set your cursor three times(last one in .icons/default/index.theme for some stupid reason)
 seat seat0 xcursor_theme 'Catppuccin-Dark-Cursors'
