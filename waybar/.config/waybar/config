@@ -2,7 +2,7 @@
     "layer": "top", // Waybar at top layer
     "modules-left": ["sway/workspaces", "sway/mode"],
     "modules-center": ["custom/media"],
-    "modules-right": ["pulseaudio", "network", "memory", "backlight", "battery", "clock", "tray", "custom/power"],
+    "modules-right": ["pulseaudio", "network", "memory", clock", "tray", "custom/power"],
     "sway/workspaces": {
         "persistent_workspaces": {
             "1": [],
@@ -46,23 +46,6 @@
     "memory": {
         "format": "{}% "
     },
-    "battery": {
-        "states": {
-            "good": 95,
-            "warning": 30,
-            "critical": 15
-        },
-        "format": "{capacity}% {icon}",
-        "format-charging": "{capacity}% ",
-        "format-plugged": "{capacity}% ",
-        "format-alt": "{time} {icon}",
-        // "format-good": "", // An empty format will hide the module
-        // "format-full": "",
-        "format-icons": ["", "", "", "", ""]
-    },
-    "battery#bat2": {
-        "bat": "BAT2"
-    },
     "network": {
         // "interface": "wlp2*", // (Optional) To force the use of this interface
         "format-wifi": "{essid} 直",
@@ -102,9 +85,6 @@
         "escape": true,
         "exec": "$HOME/.config/waybar/custom_modules/mediaplayer.py 2> /dev/null" // Script in resources folder
         // "exec": "$HOME/.config/waybar/mediaplayer.py --player spotify 2> /dev/null" // Filter player based on name
-    },
-    "backlight": {
-        "format": "{percent}% "
     },
     "custom/power": {
         "format": "襤",
