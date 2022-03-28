@@ -13,6 +13,7 @@ source ~/.config/nvim/treesitter.vim
 
 Plug 'kyazdani42/nvim-web-devicons'
 Plug 'kyazdani42/nvim-tree.lua'
+Plug 'folke/which-key.nvim'
 call plug#end()
 
 source ~/.config/nvim/mappings.vim
@@ -26,6 +27,10 @@ autocmd FileType scss setl iskeyword+=@-@
 " Fancy notifications
 lua << EOF
 vim.notify = require('notify')
+EOF
+
+lua << EOF
+require("which-key").setup{}
 EOF
 
 " This for some reason doesn't work in a separate file
