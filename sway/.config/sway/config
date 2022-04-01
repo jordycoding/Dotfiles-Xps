@@ -251,6 +251,10 @@ input type:touchpad {
     natural_scroll enabled
 }
 
+input type:keyboard {
+    xkb_options ctrl:nocaps
+}
+
 # Yay all sorts of theming and settings because apparently we can't have one standard
 set $gnome-schema org.gnome.desktop.interface
 
