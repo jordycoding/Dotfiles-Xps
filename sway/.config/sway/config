@@ -22,7 +22,8 @@ set $menu rofi -show drun
 ### Output configuration
 #
 # Default wallpaper (more resolutions are available in /usr/share/backgrounds/sway/)
-output * bg ~/Pictures/Wallpapers/evening-sky.png fill
+#output * bg ~/Pictures/Wallpapers/evening-sky.png fill
+exec ~/.azotebg
 #
 # Example configuration:
 #
@@ -84,7 +85,7 @@ exec swayidle -w \
 # Basics:
 #
     # Start a terminal
-    bindsym $mod+Return exec $term
+    bindsym $mod+Return exec $term -e tmux
 
     # Kill focused window
     bindsym $mod+Shift+q kill
