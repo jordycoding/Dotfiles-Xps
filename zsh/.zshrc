@@ -1,4 +1,12 @@
-pfetch
+# Checks if tmux is available
+if [ -x $(command -v tmux) ]; then
+    # Only runs pfetch when current pane is the only pane in the windows
+    if [[ $(tmux list-panes | wc -l) = "1" ]]; then
+        pfetch
+    fi
+else
+    pfetch
+fi
 # Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
 # Initialization code that may require console input (password prompts, [y/n]
 # confirmations, etc.) must go above this block; everything else may go below.
@@ -6,13 +14,10 @@ if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]
   source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
 fi
 
+# Setup pyenv
 export PYENV_ROOT="$HOME/.pyenv"
 export PATH="$PYENV_ROOT/bin:$PATH"
 export PIPENV_PYTHON="$PYENV_ROOT/shims/python"
-
-plugin=(
-    pyenv
-)
 
 eval "$(pyenv init --path)"
 eval "$(pyenv init -)"
