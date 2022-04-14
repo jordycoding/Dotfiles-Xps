@@ -28,6 +28,7 @@ Plug 'lewis6991/gitsigns.nvim'
 Plug 'pwntester/octo.nvim'
 Plug 'ggandor/lightspeed.nvim'
 Plug 'simrat39/symbols-outline.nvim'
+Plug 'feline-nvim/feline.nvim'
 call plug#end()
 
 source ~/.config/nvim/mappings.vim
@@ -42,16 +43,6 @@ lua << EOF
 require'gitsigns'.setup()
 require'octo'.setup()
 EOF
-
-"lua << EOF
-"require('bufferline').setup({
-"   options = {
-"        mode = "tabs",
-"        offsets = {{filetype="NvimTree", text=""}},
-"        separator_style = "slant"
-"    }
-"})
-"EOF
 
 lua << EOF
 require('plugins.lsp')
@@ -68,11 +59,17 @@ require("which-key").setup{}
 EOF
 
 " This for some reason doesn't work in a separate file
+"lua << EOF
+"require'lualine'.setup{
+"options = { theme = 'catppuccin' },
+"extensions = { 'nerdtree' }
+"}
+"EOF
+
 lua << EOF
-require'lualine'.setup{
-options = { theme = 'catppuccin' },
-    extensions = { 'nerdtree' }
-}
+require('feline').setup({
+    components = require('catppuccin.core.integrations.feline')
+})
 EOF
 
 lua <<EOF
