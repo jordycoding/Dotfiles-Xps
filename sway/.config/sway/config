@@ -22,7 +22,10 @@ set $menu rofi -show drun
 ### Output configuration
 #
 # Default wallpaper (more resolutions are available in /usr/share/backgrounds/sway/)
-output * bg ~/Pictures/Wallpapers/Waves Dark Alt 6016x6016.jpg fill
+output * bg ~/Pictures/Wallpapers/wavy_lines_v02_5120x2880.png fill
+
+# Set monitor to 100Hz
+output DP-2 mode 3440x1440@99.982Hz
 #
 # Example configuration:
 #
@@ -256,4 +259,5 @@ input "type:keyboard" {
 seat seat0 xcursor_theme 'Catppuccin-Dark-Cursors'
 
 for_window [app_id="zenity"] floating enable
+assign [title="Discord"] 4
 include /etc/sway/config.d/*
