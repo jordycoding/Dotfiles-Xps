@@ -1,4 +1,38 @@
 local cmp = require'cmp'
+local lspkind = require'lspkind'
+local configs = require'lspconfig.configs'
+
+if not configs.ls_emmet then
+  configs.ls_emmet = {
+    default_config = {
+      cmd = { 'ls_emmet', '--stdio' };
+      filetypes = {
+        'html',
+        'css',
+        'scss',
+        'javascript',
+        'javascriptreact',
+        'typescript',
+        'typescriptreact',
+        'haml',
+        'xml',
+        'xsl',
+        'pug',
+        'slim',
+        'sass',
+        'stylus',
+        'less',
+        'sss',
+        'hbs',
+        'handlebars',
+      };
+      root_dir = function(fname)
+        return vim.loop.cwd()
+      end;
+      settings = {};
+    };
+  }
+end
 
   cmp.setup({
     snippet = {
@@ -24,12 +58,22 @@ local cmp = require'cmp'
     sources = cmp.config.sources({
       { name = 'nvim_lsp' },
       { name = 'vsnip' }, -- For vsnip users.
+      { name = 'nvim_lsp_signature_help'}
       -- { name = 'luasnip' }, -- For luasnip users.
       -- { name = 'ultisnips' }, -- For ultisnips users.
       -- { name = 'snippy' }, -- For snippy users.
     }, {
       { name = 'buffer' },
-    })
+    }),
+    formatting = {
+        format = lspkind.cmp_format({
+            mode = 'symbol',
+            maxwidth = 50,
+            before = function(entry, vim_item)
+                return vim_item
+            end  
+        })
+    }
   })
 
 local capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities())
@@ -74,7 +118,7 @@ end
 
 -- Use a loop to conveniently call 'setup' on multiple servers and
 -- map buffer local keybindings when the language server attaches
-local servers = { 'tsserver', 'pyright', 'bashls', 'ansiblels' }
+local servers = { 'tsserver', 'pyright', 'bashls', 'ansiblels', 'ls_emmet' }
 for _, lsp in pairs(servers) do
   require('lspconfig')[lsp].setup {
     on_attach = on_attach,
@@ -86,6 +130,9 @@ for _, lsp in pairs(servers) do
   }
 end
 
+require('lspconfig')['java_language_server'].setup {
+    cmd = {'/home/jordy/java-language-server/dist/lang_server_linux.sh'}
+}
 require('lspconfig')['tsserver'].setup {
     on_attach = function(client)
         client.resolved_capabilities.document_formatting = false

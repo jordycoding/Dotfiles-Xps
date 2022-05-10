@@ -21,8 +21,13 @@ Plug 'nanozuki/tabby.nvim'
 Plug 'marko-cerovac/material.nvim'
 Plug 'neovim/nvim-lspconfig'
 Plug 'hrsh7th/vim-vsnip'
+Plug 'hrsh7th/cmp-vsnip'
+Plug 'rafamadriz/friendly-snippets'
 Plug 'hrsh7th/nvim-cmp'
+Plug 'hrsh7th/cmp-nvim-lsp-signature-help'
+Plug 'onsails/lspkind-nvim'
 Plug 'hrsh7th/cmp-nvim-lsp'
+Plug 'pedro757/emmet'
 Plug 'jose-elias-alvarez/null-ls.nvim'
 Plug 'lewis6991/gitsigns.nvim'
 Plug 'pwntester/octo.nvim'
@@ -101,7 +106,6 @@ lua << EOF
 require"nvim-autopairs".setup{}
 EOF
 
-nnoremap <silent> gb :BufferLinePick<cr>
 " Neither does this
 colorscheme catppuccin
 set termguicolors
