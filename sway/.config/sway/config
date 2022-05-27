@@ -253,7 +253,7 @@ exec_always {
 }
 
 input "type:keyboard" {
-    xkb_options ctrl:nocaps
+    xkb_options caps:escape
 }
 # Yeah you have to set your cursor three times(last one in .icons/default/index.theme for some stupid reason)
 seat seat0 xcursor_theme 'Catppuccin-Dark-Cursors'
