@@ -73,6 +73,9 @@ end
                 return vim_item
             end  
         })
+    },
+    experimental = {
+        ghost_test = true,
     }
   })
 
@@ -118,7 +121,7 @@ end
 
 -- Use a loop to conveniently call 'setup' on multiple servers and
 -- map buffer local keybindings when the language server attaches
-local servers = { 'tsserver', 'pyright', 'bashls', 'ansiblels', 'ls_emmet' }
+local servers = { 'tsserver', 'pyright', 'bashls', 'ansiblels', 'ls_emmet', 'rnix' }
 for _, lsp in pairs(servers) do
   require('lspconfig')[lsp].setup {
     on_attach = on_attach,
@@ -129,6 +132,37 @@ for _, lsp in pairs(servers) do
     capabilities = capabilities
   }
 end
+
+-- Icons in gutter for linting
+local signs = { Error = " ", Warn = " ", Hint = " ", Info = " " }
+for type, icon in pairs(signs) do
+  local hl = "DiagnosticSign" .. type
+  vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = hl })
+end
+
+-- Show line diagnostics in hover window
+vim.o.updatetime = 250
+vim.api.nvim_create_autocmd("CursorHold", {
+  buffer = bufnr,
+  callback = function()
+    local opts = {
+      focusable = false,
+      close_events = { "BufLeave", "CursorMoved", "InsertEnter", "FocusLost" },
+      border = 'rounded',
+      source = 'always',
+      prefix = ' ',
+      scope = 'cursor',
+    }
+    vim.diagnostic.open_float(nil, opts)
+  end
+})
+
+-- Disable virtualtext as it doesn't wrap and hovering works better
+vim.diagnostic.config({
+    virtual_text = false,
+    severity_sort = true,
+    update_in_insert = true,
+})
 
 require('lspconfig')['java_language_server'].setup {
     cmd = {'/home/jordy/java-language-server/dist/lang_server_linux.sh'}

@@ -2,7 +2,7 @@
     "layer": "top", // Waybar at top layer
     "modules-left": ["sway/workspaces", "sway/mode"],
     "modules-center": ["custom/media"],
-    "modules-right": ["pulseaudio", "network", "memory", "backlight", "battery", "clock", "tray", "custom/power"],
+    "modules-right": ["pulseaudio", "network", "memory", "backlight", "battery", "clock", "tray", "custom/power", "custom/nc"],
     "sway/workspaces": {
         "persistent_workspaces": {
             "1": [],
@@ -110,6 +110,22 @@
         "format": "襤",
         "interval": "once",
         "on-click": "wlogout -c 7 -r 7 -p layer-shell"
+    },
+    "custom/nc": {
+        "tooltip": false,
+        "format": "{icon}",
+        "format-icons": {
+          "notification": "<span foreground='red'><sup></sup></span>",
+          "none": "",
+          "dnd-notification": "<span foreground='red'><sup></sup></span>",
+          "dnd-none": ""
+        },
+        "return-type": "json",
+        "exec-if": "which swaync-client",
+        "exec": "swaync-client -swb",
+        "on-click": "swaync-client -t -sw",
+        "on-click-right": "swaync-client -d -sw",
+        "escape": true
     }
 }
 

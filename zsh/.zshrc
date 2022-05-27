@@ -64,6 +64,9 @@ setopt auto_list
 setopt auto_menu
 setopt always_to_end # move cursor to end if word had one match
 
+# Set neovim as default editor
+export EDITOR=nvim
+
 #Set up autocomplete menus to navigate with keyboard and such
 zstyle ':completion:*' menu
 zstyle ':completion:*' menu select

@@ -33,6 +33,8 @@ Plug 'lewis6991/gitsigns.nvim'
 Plug 'pwntester/octo.nvim'
 Plug 'ggandor/lightspeed.nvim'
 Plug 'simrat39/symbols-outline.nvim'
+Plug 'stevearc/dressing.nvim'
+Plug 'folke/trouble.nvim'
 call plug#end()
 
 source ~/.config/nvim/mappings.vim
@@ -40,12 +42,15 @@ source ~/.config/nvim/vars.vim
 
 set splitright 
 
+autocmd BufEnter * ++nested if winnr('$') == 1 && bufname() == 'NvimTree_' . tabpagenr() | quit | endif
+
 " So scss functions can be called or smth like that
 autocmd FileType scss setl iskeyword+=@-@
 
 lua << EOF
 require'gitsigns'.setup()
 require'octo'.setup()
+require'trouble'.setup()
 EOF
 
 "lua << EOF
@@ -82,6 +87,11 @@ EOF
 
 lua <<EOF
 require('telescopesetup')
+EOF
+
+lua <<EOF
+require('catppuccin').setup{} 
+require('catppuccin').load()
 EOF
 
 let g:nvim_tree_indent_markers = 1

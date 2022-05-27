@@ -5,3 +5,4 @@ set expandtab
 set nu
 set autoindent
 set nohlsearch
+set mouse=a
