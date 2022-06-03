@@ -1,3 +1,12 @@
+# Checks if tmux is available
+if [ -x $(command -v tmux) ]; then
+    # Only runs pfetch when current pane is the only pane in the windows
+    if [[ $(tmux list-panes | wc -l) = "1" ]]; then
+        pfetch
+    fi
+else
+    pfetch
+fi
 # Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
 # Initialization code that may require console input (password prompts, [y/n]
 # confirmations, etc.) must go above this block; everything else may go below.
@@ -5,6 +14,14 @@ if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]
   source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
 fi
 
+# Setup pyenv
+export PYENV_ROOT="$HOME/.pyenv"
+export PATH="$PYENV_ROOT/bin:$PATH"
+export PIPENV_PYTHON="$PYENV_ROOT/shims/python"
+
+eval "$(pyenv init --path)"
+eval "$(pyenv init -)"
+eval "$(pyenv virtualenv-init -)"
 ### Added by Zinit's installer
 if [[ ! -f $HOME/.local/share/zinit/zinit.git/zinit.zsh ]]; then
     print -P "%F{33} %F{220}Installing %F{33}ZDHARMA-CONTINUUM%F{220} Initiative Plugin Manager (%F{33}zdharma-continuum/zinit%F{220})…%f"
@@ -47,6 +64,9 @@ setopt auto_list
 setopt auto_menu
 setopt always_to_end # move cursor to end if word had one match
 
+# Set neovim as default editor
+export EDITOR=nvim
+
 #Set up autocomplete menus to navigate with keyboard and such
 zstyle ':completion:*' menu
 zstyle ':completion:*' menu select
@@ -56,7 +76,6 @@ zstyle ':completion:::::' completer _expand _complete _ignored _approximate #ena
 zinit light zdharma-continuum/fast-syntax-highlighting #Syntax highlighting
 #eval "$(starship init zsh)"
 eval $(thefuck --alias)
-pfetch
 source /usr/share/zsh-theme-powerlevel10k/powerlevel10k.zsh-theme
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.

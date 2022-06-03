@@ -25,7 +25,7 @@ set $menu rofi -show drun
 output * bg ~/Pictures/Wallpapers/wavy_lines_v02_5120x2880.png fill
 
 # Set monitor to 100Hz
-output DP-2 mode 3440x1440@99.982Hz
+output DP-1 mode 3440x1440@99.982Hz
 #
 # Example configuration:
 #
@@ -34,6 +34,7 @@ output DP-2 mode 3440x1440@99.982Hz
 # You can get the names of your outputs by running: swaymsg -t get_outputs
 
 # Hide title bars
+output DP-2 mode 3440x1440@100Hz
 default_border pixel
 client.focused #96CDFB #1E1E2E #D9E0EE #F8BD96 #96CDFB
 
