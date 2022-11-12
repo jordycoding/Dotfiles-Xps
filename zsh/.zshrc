@@ -32,6 +32,11 @@ if [[ ! -f $HOME/.local/share/zinit/zinit.git/zinit.zsh ]]; then
 fi
 
 source "$HOME/.local/share/zinit/zinit.git/zinit.zsh"
+
+source "/usr/share/fzf/key-bindings.zsh"
+source "/usr/share/fzf/completion.zsh"
+export FZF_DEFAULT_OPTS='--color=bg+:#302D41,bg:#1E1E2E,spinner:#F8BD96,hl:#F28FAD --color=fg:#D9E0EE,header:#F28FAD,info:#DDB6F2,pointer:#F8BD96 --color=marker:#F8BD96,fg+:#F2CDCD,prompt:#DDB6F2,hl+:#F28FAD'
+
 autoload -Uz _zinit
 (( ${+_comps} )) && _comps[zinit]=_zinit
 zinit light zsh-users/zsh-completions #Completions
@@ -66,6 +71,9 @@ setopt always_to_end # move cursor to end if word had one match
 
 # Set neovim as default editor
 export EDITOR=nvim
+
+path+=('$HOME/.dotnet/tools')
+export PATH
 
 #Set up autocomplete menus to navigate with keyboard and such
 zstyle ':completion:*' menu
