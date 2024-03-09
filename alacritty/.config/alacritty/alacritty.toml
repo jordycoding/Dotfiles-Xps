@@ -1,0 +1,6 @@
+import = [
+  "~/.conig/alacritty/catppuccin-mocha.toml"
+]
+
+[env]
+TERM = "xterm-256color"
